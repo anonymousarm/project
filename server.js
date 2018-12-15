@@ -1,5 +1,5 @@
 var matrix = []
-var n = 100; 
+var n = 100;
 var m = 100;
 
 var side = 10;
@@ -9,13 +9,12 @@ var gishatichArr = [];
 var mardArr = [];
 var mardakerArr = [];
 
-function setup() {
-    for (var y = 0; y <n; y++){
-        matrix[y]= [];
-      for (var x = 0; x <m; x++){
-        matrix[y][x]= random(0,5)
-        matrix[y][x] = parseInt(matrix[y][x])
-    }
+    for (var y = 0; y < n; y++) {
+        matrix[y] = [];
+        for (var x = 0; x < m; x++) {
+            matrix[y][x] = random(0, 5)
+            matrix[y][x] = parseInt(matrix[y][x])
+        }
     }
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -25,7 +24,7 @@ function setup() {
             }
             else if (matrix[y][x] == 2) {
                 var xt = new Xotaker(x, y)
-                xotakerArr.push(xt)
+                xotadakerArr.push(xt)
             }
             else if (matrix[y][x] == 3) {
                 var gsh = new Gishatich(x, y)
@@ -44,43 +43,11 @@ function setup() {
         }
     }
 
-    frameRate(5);
-    createCanvas(matrix[0].length * side, matrix.length * side);
-    background('#acacac');
-}
 
 
 
-
-function draw() {
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
-                fill("green");
-            }
-            else if (matrix[y][x] == 2) {
-                fill("yellow");
-            }
-            else if (matrix[y][x] == 3) {
-                fill("red");
-            }
-            else if (matrix[y][x] == 0) {
-                fill("#acacac");
-            }
-            else if (matrix[y][x] == 4) {
-                fill("#FDDCB1")
-            }
-            else if (matrix[y][x] == 5) {
-                fill("black")
-            }
-
-            rect(x * side, y * side, side, side)
-
-            // fill("blue")
-            // text(x + " " + y, x * side + side / 2, y * side + side / 2)
-
-        }
-    }
+setInterval(drawserver, 3000)
+function drawserver() {
 
     for (var i in grassArr) {
         grassArr[i].mult()
@@ -111,4 +78,7 @@ function draw() {
         mardakerArr[i].mult()
         mardakerArr[i].die()
     }
+    console.log(matrix);
+
+    io.socket.emit("matrix", matrix)
 }

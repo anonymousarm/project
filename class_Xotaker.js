@@ -1,8 +1,7 @@
-
+var LeavingCreature = require("./living_creature.js");
 module.exports = class Xotaker extends LivingCreature {
     constructor(x, y) {
-        super(x, y, index);
-
+        super(x, y,);
         this.energy = 5;
 
     }
@@ -52,16 +51,17 @@ module.exports = class Xotaker extends LivingCreature {
     }
 
     eat() {
-        var food = random(this.chooseCell(1))
-        if (food) {
-            var newX = food[0]
-            var newY = food[1]
-            matrix[newY][newX] = 2
-            matrix[this.y][this.x] = 0
+        var empty = this.chooseCell(1)
+        var notempty = this.random(empty);
+        if (notempty) {
+            var newX = notempty[0]
+            var newY = notempty[1]
+            matrix[this.y][this.x] = 2
 
             for (var i in grassArr) {
-                if (grassArr[i].x == newX && grassArr[i].y == newY) {
+                if (grassArr[i].x == this.x && grassArr[i].y == this.y) {
                     grassArr.splice(i, 1)
+                    break;
                 }
             }
 
