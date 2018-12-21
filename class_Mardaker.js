@@ -55,10 +55,11 @@ module.exports = class Mardaker extends LivingCreature {
     }
 
     mult() {
-        var empty = random(this.chooseCell(0))
-        if (empty && this.energy > 10) {
-            var newX = empty[0]
-            var newY = empty[1]
+        var empty = this.chooseCell(0);
+        var newcell = empty[Math.floor(Math.random()* empty.length)];
+        if (newcell && this.energy > 10) {
+            var newX = newcell[0]
+            var newY = newcell[1]
             matrix[newY][newX] = 1
             var mk = new Mardaker(newX, newY)
             mardakerArr.push(mk)
@@ -66,11 +67,12 @@ module.exports = class Mardaker extends LivingCreature {
     }
 
     move() {
-        var empty = random(this.chooseCell(0))
+        var empty = this.chooseCell(0);
+        var newcell = empty[Math.floor(Math.random()* empty.length)]; 
         this.energy--;
-        if (empty) {
-            var newX = empty[0]
-            var newY = empty[1]
+        if (newcell) {
+            var newX = newcell[0]
+            var newY = newcell[1]
             matrix[newY][newX] = 5
             matrix[this.y][this.x] = 0
 
@@ -79,10 +81,11 @@ module.exports = class Mardaker extends LivingCreature {
         }
     }
     eat() {
-        var food = random(this.chooseCell(4))
-        if (food) {
-            var newX = food[0]
-            var newY = food[1]
+        var empty = this.chooseCell(4);
+        var newcell = empty[Math.floor(Math.random()* empty.length)];
+         if (newcell) {
+            var newX = newcell[0]
+            var newY = newcell[1]
             matrix[newY][newX] = 5
             matrix[this.y][this.x] = 0
 

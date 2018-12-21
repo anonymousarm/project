@@ -35,10 +35,11 @@ module.exports = class Mard extends LivingCreature {
     }
 
     mult() {
-        var empty = random(this.chooseCell(0))
-        if (empty && this.energy > 10) {
-            var newX = empty[0]
-            var newY = empty[1]
+        var empty = this.chooseCell(0);
+        var newcell = empty[Math.floor(Math.random()* empty.length)];
+        if (newcell && this.energy > 10) {
+            var newX = newcell[0]
+            var newY = newcell[1]
             matrix[newY][newX] = 1
             var md = new Mard(newX, newY)
             mardArr.push(md)
@@ -46,11 +47,12 @@ module.exports = class Mard extends LivingCreature {
     }
 
     move() {
-        var empty = random(this.chooseCell(0))
+        var empty = this.chooseCell(0);
+        var newcell = empty[Math.floor(Math.random()* empty.length)];
         this.energy--;
-        if (empty) {
-            var newX = empty[0]
-            var newY = empty[1]
+        if (newcell) {
+            var newX = newcell[0]
+            var newY = newcell[1]
             matrix[newY][newX] = 4
             matrix[this.y][this.x] = 0
 
@@ -59,9 +61,15 @@ module.exports = class Mard extends LivingCreature {
         }
     }
     eat() {
-        var food2 = random(this.chooseCell(1))
-        var food1 = random(this.chooseCell(2))
-        var food = random(this.chooseCell(3))
+        var food2Arr = this.chooseCell(1);
+        var food2 = food2Arr[Math.floor(Math.random()* food2Arr.length)];
+
+        var food1Arr = this.chooseCell(2);
+        var food1 = food1Arr[Math.floor(Math.random()* food1Arr.length)];
+
+        var foodArr = this.chooseCell(3);
+        var food = foodArr[Math.floor(Math.random()* foodArr.length)];
+
         if (food) {
             var newX = food[0]
             var newY = food[1]
