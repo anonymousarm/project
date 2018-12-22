@@ -21,12 +21,13 @@ var mardakerArr = [];
 for (var y = 0; y < n; y++) {
     matrix[y] = [];
     for (var x = 0; x < m; x++) {
-        matrix[y] = Math.floor(Math.random(0 , 5 ) * matrix.length);
-       
+        matrix[y] = Math.floor(Math.random() * 5);
     }
 }
+
 for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
+
         if (matrix[y][x] == 1) {
             var gr = new Grass(x, y)
             grassArr.push(gr)
@@ -47,8 +48,6 @@ for (var y = 0; y < matrix.length; y++) {
             var mk = new Mardaker(x, y)
             mardakerArr.push(mk)
         }
-
-
     }
 }
 
